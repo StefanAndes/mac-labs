@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/favicon.png">
+    <meta property="og:image" content="assets/og_hydroelastic.png">
+    <title>MAC Labs • HydroElastic™</title>
+  <style>
+    :root {
+      --teal: #008080;
+      --charcoal: #273038;
+      --mint: #d8f7e9;
+      --font-head: "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-head); color: var(--charcoal); line-height: 1.5; }
+    a { color: var(--teal); text-decoration: none; }
+    header { 
+      background: #ffffff; 
+      padding: 1rem 5%;
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .logo { 
+      display: flex; 
+      align-items: center; 
+    }
+    .logo img { 
+      width: 45px; 
+      height: 45px;
+      object-fit: contain;
+    }
+    nav { 
+      display: flex; 
+      gap: 3rem; 
+    }
+    nav a { 
+      font-weight: 600;
+      color: var(--teal);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      transition: all 0.2s ease;
+    }
+    nav a:hover {
+      opacity: 0.8;
+    }
+    .cta-btn { 
+      display: inline-block;
+      background: var(--teal); 
+      color:#fff; 
+      padding:.75rem 1.5rem; 
+      border-radius:4px; 
+      font-weight:600; 
+      transition:background .2s;
+      width: fit-content;
+    }
+    .cta-btn:hover { background: #006666; }
+    .hero { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      padding: calc(4rem + 80px) 5% 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 2rem;
+    }
+    .hero h1 { 
+      font-size: 3.5rem; 
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      color: var(--teal);
+      font-weight: 600;
+    }
+    .hero p { 
+      max-width: 540px; 
+      margin-bottom: 2rem; 
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: #4a5568;
+      opacity: 0.9;
+    }
+    .hero img { 
+      width: 45%;
+      max-width: 500px;
+      height: auto;
+      object-fit: contain;
+    }
+    .hero > div {
+      width: 50%;
+    }
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: calc(2rem + 80px);
+      }
+      .hero > div,
+      .hero img {
+        width: 100%;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+    .hero > div { 
+      flex: 1; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center;
+      max-width: 600px;
+    }
+    @media(min-width:768px) {
+      .hero {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+        text-align: left;
+        padding: 2rem;
+      }
+      .hero img {
+        width: 45%;
+        max-width: 450px;
+        object-fit: contain;
+      }
+      .hero > div {
+        width: 55%;
+        padding-right: 1rem;
+      }
+    }
+    .section { padding:3.5rem 1rem; max-width:1080px; margin:auto; }
+    .section h2 { 
+      font-size: 2rem; 
+      margin-bottom: 1.25rem; 
+      text-align: center;
+      color: var(--teal);
+      font-weight: 600;
+    }
+    .benefits-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .benefit { text-align:center; }
+    .benefit img { width:64px; height:64px; margin-bottom:.75rem; }
+    .price-box { border:2px solid var(--teal); border-radius:8px; padding:2rem; text-align:center; }
+    .price-box h3 { margin-bottom:.5rem; font-size:1.5rem; }
+    .price { font-size:2.25rem; color:var(--teal); margin:.5rem 0; }
+    .price small { font-size:1rem; color:var(--charcoal); }
+    .plan-grid { display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); }
+    .faq { margin-top:2rem; }
+    details { margin-bottom:1rem; background:#f9f9f9; padding:1rem; border-radius:4px; }
+    footer { background:#f5f5f5; padding:2rem 1rem; text-align:center; font-size:.9rem; }
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo"><img src="logo main.png" alt="MAC Labs logo"></div>
+    <nav>
+      <a href="#how">How It Works</a>
+      <a href="#plans">Plans</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <h1>Hydrate Every Fibre.<br/>Move Like New.</h1>
+      <p>HydroElastic™ delivers collagen, hyaluronic acid & smart electrolytes so your fascia behaves like a freshly soaked sponge — flexible, gliding, pain‑free.</p>
+      <a href="#plans" class="cta-btn">Start Free 7‑Stick Trial</a>
+    </div>
+         <img src="product picture.png" alt="HydroElastic sachet" />
+  </section>
+
+  <!-- Sponge infographic -->
+  <section class="section" id="how">
+    <h2>Why the Sponge Metaphor Matters</h2>
+    <img src="hydroelastic_sponge_infographic.png" alt="Sponge squeeze and soak infographic" style="width:100%;max-width:900px;display:block;margin:2rem auto;">
+    <p style="text-align:center;max-width:800px;margin:0 auto;font-size:1.125rem;line-height:1.6;">
+      Stretch or roll your fascia to <strong style="color:var(--teal)">squeeze waste fluid out</strong>. 
+      Release pressure and sip HydroElastic: <strong style="color:var(--teal)">fresh water + nutrients rush back in</strong>, 
+      leaving tissue elastic and energized.
+    </p>
+  </section>
+
+  <!-- Benefits -->
+  <section class="section">
+    <h2>3‑in‑1 Science‑Backed Benefits</h2>
+          <div class="benefits-grid">
+        <div class="benefit"><img src="assets/icon_droplet.png" alt="Hydration icon"><h3>Optimal Hydration</h3><p>150 mg hyaluronic acid + electrolytes pull water deep into the extracellular matrix.</p></div>
+        <div class="benefit"><img src="assets/icon_molecule.png" alt="Fascia icon"><h3>Fascial Support</h3><p>5 g collagen peptides & MSM rebuild flexible collagen fibres.</p></div>
+        <div class="benefit"><img src="assets/icon_lab.png" alt="Lab flask"><h3>Clinically Tested</h3><p>Ingredients & doses validated in human trials for joint comfort & skin elasticity.</p></div>
+      </div>
+  </section>
+
+  <!-- 90‑Day protocol section -->
+  <section class="section" style="background:#f8fffc;">
+    <h2>The 90‑Day Hydration Protocol</h2>
+    <ol style="max-width:720px;margin:2rem auto;font-size:1.1rem;line-height:1.6;">
+      <li><strong>Day 1–7  Squeeze & Sip</strong> — follow our micro‑tutorials, feel first glide improvements.</li>
+      <li><strong>Day 8‑30  Collagen Loading</strong> — fibres start rebuilding, stiffness fades.</li>
+      <li><strong>Day 31‑90  Elastic Upgrade</strong> — fascia holds hydration, skin glow & joint range improve.</li>
+    </ol>
+    <p style="text-align:center;margin-top:1.25rem;">Stick with it—science shows collagen & HA shine after 8–12 weeks.</p>
+  </section>
+
+  <!-- Plans & pricing -->
+  <section class="section" id="plans">
+    <h2>Pick Your Starter Plan</h2>
+    <div class="plan-grid" style="margin-top:2rem;">
+      <div class="price-box">
+        <h3>7‑Stick Sampler</h3>
+        <div class="price">FREE<small> + $4.95 S&H</small></div>
+        <p style="margin:1rem 0 1.5rem;">Taste it, feel it for a week.</p>
+        <a href="#" class="cta-btn" style="display:inline-block;">Claim Sampler</a>
+      </div>
+      <div class="price-box" style="border-color:var(--charcoal);">
+        <h3>90‑Day Core Protocol</h3>
+        <div class="price">$89.85</div>
+        <p style="margin:1rem 0 1.5rem;">3 pouches prepaid (30 sticks each) — free shaker bottle.</p>
+        <a href="#" class="cta-btn" style="display:inline-block;">Start Core</a>
+      </div>
+      <div class="price-box">
+        <h3>6‑Month Momentum</h3>
+        <div class="price">$167.70</div>
+        <p style="margin:1rem 0 1.5rem;">Extra savings + priority support.</p>
+        <a href="#" class="cta-btn" style="display:inline-block;">Go Momentum</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof -->
+  <section class="section" style="background:#fafafa;">
+    <h2>Real Users, Real Flexibility</h2>
+    <blockquote style="max-width:800px;margin:2rem auto;font-style:italic;font-size:1.2rem;">"I sit all day coding. After 4 weeks on HydroElastic and the 2‑minute stretches, my hamstrings finally let me touch my toes again 🙌" <br>— Chris M., Toronto</blockquote>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Is HydroElastic safe?</summary><p>All ingredients are GRAS or Health Canada‑approved at the listed doses and every batch is third‑party tested.</p></details>
+      <details><summary>When will I feel results?</summary><p>Early users feel smoother movement within 1–2 weeks, with best collagen/HA effects showing by week 8.</p></details>
+      <details><summary>Can I cancel after 3 months?</summary><p>Yes—your Core Protocol is prepaid. After 90 days you can switch to monthly, pause, or cancel anytime, hassle‑free.</p></details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 MAC Labs • Science‑backed, transparency‑first supplements</p>
+    <p><a href="#">Terms</a> • <a href="#">Privacy</a> • <a href="mailto:support@maclabs.com">support@maclabs.com</a></p>
+  </footer>
+</body>
+</html> 
