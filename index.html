@@ -338,12 +338,12 @@
   <style>
     .video-section {
       background: #ffffff;
-      padding: 6rem 1rem;
+      padding: 0;
       margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 80vh;
+      min-height: 100vh;
       position: relative;
       overflow: hidden;
     }
@@ -354,8 +354,9 @@
       background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
     }
     .video-container {
-      max-width: 900px;
       width: 100%;
+      max-width: 1000px;
+      padding: 4rem 2rem;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -373,7 +374,7 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 30px 60px -20px rgba(0,128,128,0.3);
-      margin: 2.5rem auto;
+      margin: 2.5rem 0;
       background: #000;
       aspect-ratio: 16/9;
       width: 100%;
@@ -403,19 +404,21 @@
     }
     @media (max-width: 768px) {
       .video-section {
-        padding: 4rem 1rem;
-        min-height: auto;
+        min-height: 100vh;
+        padding: 0;
+      }
+      .video-container {
+        padding: 3rem 1.5rem;
       }
       .video-container h2 {
         font-size: 1.75rem;
       }
       .video-wrapper {
-        margin: 1.5rem auto;
+        margin: 1.5rem 0;
         border-radius: 12px;
       }
       .video-description {
         font-size: 1rem;
-        padding: 0 1rem;
       }
     }
   </style>
@@ -448,103 +451,152 @@
       });
     });
 
-    // Video autoplay functionality - improved
+    // Enhanced video autoplay functionality
     function initializeVideoAutoplay() {
       const videos = document.querySelectorAll('.auto-video');
       
       // Function to play video with retry logic
       function attemptVideoPlay(video) {
         const wrapper = video.closest('.video-wrapper');
+        
+        // Ensure video is ready
+        if (video.readyState < 3) {
+          video.addEventListener('canplay', () => attemptVideoPlay(video), { once: true });
+          return;
+        }
+        
         wrapper.classList.add('visible');
         
-        // Set attributes to ensure autoplay works
-        video.setAttribute('muted', 'true');
+        // Force attributes for autoplay
         video.muted = true;
         video.loop = true;
         video.playsInline = true;
+        video.setAttribute('muted', 'muted');
+        video.setAttribute('playsinline', 'playsinline');
+        video.defaultMuted = true;
         
-        // Try to play
-        const playPromise = video.play();
-        
-        if (playPromise !== undefined) {
-          playPromise
+        // Try multiple play attempts
+        const playVideo = () => {
+          video.play()
             .then(() => {
-              console.log('Video playing:', video.src);
+              console.log('Video playing successfully');
+              video.dataset.playing = 'true';
             })
-            .catch(error => {
-              console.log('Autoplay prevented, attempting with user gesture:', error);
-              // Retry on any user interaction
-              const retryPlay = () => {
-                video.play().catch(() => {});
-                document.removeEventListener('click', retryPlay);
-                document.removeEventListener('touchstart', retryPlay);
-              };
-              document.addEventListener('click', retryPlay);
-              document.addEventListener('touchstart', retryPlay);
+            .catch((error) => {
+              console.log('Play attempt failed:', error);
+              // Try again after a short delay
+              setTimeout(() => {
+                if (video.dataset.playing !== 'true') {
+                  video.play().catch(() => {});
+                }
+              }, 100);
             });
-        }
+        };
+        
+        playVideo();
       }
       
-      // Create intersection observer
+      // Create intersection observer with better settings
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           const video = entry.target;
           
-          if (entry.isIntersecting) {
-            // Video is in view - play it
+          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+            // Reset playing state
+            video.dataset.playing = 'false';
             attemptVideoPlay(video);
           } else {
-            // Video is out of view - pause it
             video.pause();
+            video.dataset.playing = 'false';
           }
         });
       }, {
-        threshold: 0.25,
-        rootMargin: '0px'
+        threshold: [0.1, 0.5, 1.0],
+        rootMargin: '50px 0px'
       });
       
       // Initialize each video
-      videos.forEach(video => {
-        // Ensure video has necessary attributes
-        video.setAttribute('muted', 'true');
+      videos.forEach((video, index) => {
+        // Force all necessary attributes
         video.muted = true;
         video.loop = true;
         video.playsInline = true;
+        video.setAttribute('muted', 'muted');
+        video.setAttribute('playsinline', 'playsinline');
+        video.defaultMuted = true;
+        
+        // Load video to prepare for playback
+        video.load();
         
         // Start observing
         observer.observe(video);
         
-        // Check if video is already in view
-        const rect = video.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isInView) {
-          attemptVideoPlay(video);
-        }
-        
-        // Also try to play when video data is loaded
-        video.addEventListener('loadeddata', () => {
+        // Check initial visibility
+        setTimeout(() => {
           const rect = video.getBoundingClientRect();
           const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-          if (isInView && video.paused) {
+          
+          if (isInView) {
             attemptVideoPlay(video);
           }
+        }, 100 * (index + 1)); // Stagger initialization
+        
+        // Fallback: try to play on various events
+        ['loadedmetadata', 'loadeddata', 'canplay'].forEach(event => {
+          video.addEventListener(event, () => {
+            const rect = video.getBoundingClientRect();
+            const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isInView && video.paused && video.dataset.playing !== 'true') {
+              attemptVideoPlay(video);
+            }
+          });
         });
       });
+      
+      // Global click handler for autoplay recovery
+      let clickHandlerAdded = false;
+      if (!clickHandlerAdded) {
+        document.addEventListener('click', () => {
+          videos.forEach(video => {
+            const rect = video.getBoundingClientRect();
+            const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isInView && video.paused) {
+              video.play().catch(() => {});
+            }
+          });
+        }, { once: true });
+        clickHandlerAdded = true;
+      }
     }
     
-    // Initialize on page load
+    // Initialize immediately
+    initializeVideoAutoplay();
+    
+    // Reinitialize after DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initializeVideoAutoplay);
-    } else {
-      initializeVideoAutoplay();
     }
     
-    // Reinitialize on visibility change (for when tab becomes active)
+    // Reinitialize on page visibility
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) {
-        initializeVideoAutoplay();
+        setTimeout(initializeVideoAutoplay, 100);
       }
+    });
+    
+    // Reinitialize on scroll (debounced)
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.querySelectorAll('.auto-video').forEach(video => {
+          const rect = video.getBoundingClientRect();
+          const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isInView && video.paused && video.dataset.playing !== 'true') {
+            video.play().catch(() => {});
+          }
+        });
+      }, 150);
     });
   </script>
 
