@@ -39,6 +39,29 @@
     </div>
   </section>
 
+  <!-- Sponge infographic -->
+  <section class="video-section" id="how">
+    <div class="video-container">
+      <h2>Why the Sponge Metaphor Matters</h2>
+      <div class="video-wrapper">
+        <video 
+          class="auto-video"
+          muted 
+          loop
+          playsinline
+          poster="assets/video_thumbnail.jpg">
+          <source src="assets/explainer_video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <p class="video-description">
+        Stretch or roll your fascia to <strong style="color:var(--teal)">squeeze waste fluid out</strong>. 
+        Release pressure and sip HydroElastic: <strong style="color:var(--teal)">fresh water + nutrients rush back in</strong>, 
+        leaving tissue elastic and energized.
+      </p>
+    </div>
+  </section>
+
   <!-- Ingredient breakdown -->
   <section class="ingredients">
     <h2>Ingredient Panel</h2>
@@ -77,5 +100,133 @@
     <p>&copy; 2025 MAC Labs</p>
     <a href="course/day1.html">Course Login</a> • <a href="partners.html">Affiliate Program</a>
   </footer>
+
+  <script>
+    // Enhanced video autoplay functionality
+    function initializeVideoAutoplay() {
+      const videos = document.querySelectorAll('.auto-video');
+      
+      // Function to play video with retry logic
+      function attemptVideoPlay(video) {
+        const wrapper = video.closest('.video-wrapper');
+        
+        // Ensure video is ready
+        if (video.readyState < 3) {
+          video.addEventListener('canplay', () => attemptVideoPlay(video), { once: true });
+          return;
+        }
+        
+        wrapper.classList.add('visible');
+        
+        // Force attributes for autoplay
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.setAttribute('muted', 'muted');
+        video.setAttribute('playsinline', 'playsinline');
+        video.defaultMuted = true;
+        
+        // Try multiple play attempts
+        const playVideo = () => {
+          video.play()
+            .then(() => {
+              console.log('Video playing successfully');
+              video.dataset.playing = 'true';
+            })
+            .catch((error) => {
+              console.log('Play attempt failed:', error);
+              // Try again after a short delay
+              setTimeout(() => {
+                if (video.dataset.playing !== 'true') {
+                  video.play().catch(() => {});
+                }
+              }, 100);
+            });
+        };
+        
+        playVideo();
+      }
+      
+      // Create intersection observer with better settings
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target;
+          
+          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+            // Reset playing state
+            video.dataset.playing = 'false';
+            attemptVideoPlay(video);
+          } else {
+            video.pause();
+            video.dataset.playing = 'false';
+          }
+        });
+      }, {
+        threshold: [0.1, 0.5, 1.0],
+        rootMargin: '50px 0px'
+      });
+      
+      // Initialize each video
+      videos.forEach((video, index) => {
+        // Force all necessary attributes
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.setAttribute('muted', 'muted');
+        video.setAttribute('playsinline', 'playsinline');
+        video.defaultMuted = true;
+        
+        // Load video to prepare for playback
+        video.load();
+        
+        // Start observing
+        observer.observe(video);
+        
+        // Check initial visibility
+        setTimeout(() => {
+          const rect = video.getBoundingClientRect();
+          const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+          
+          if (isInView) {
+            attemptVideoPlay(video);
+          }
+        }, 100 * (index + 1)); // Stagger initialization
+        
+        // Fallback: try to play on various events
+        ['loadedmetadata', 'loadeddata', 'canplay'].forEach(event => {
+          video.addEventListener(event, () => {
+            const rect = video.getBoundingClientRect();
+            const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isInView && video.paused && video.dataset.playing !== 'true') {
+              attemptVideoPlay(video);
+            }
+          });
+        });
+      });
+      
+      // Global click handler for autoplay recovery
+      let clickHandlerAdded = false;
+      if (!clickHandlerAdded) {
+        document.addEventListener('click', () => {
+          videos.forEach(video => {
+            const rect = video.getBoundingClientRect();
+            const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isInView && video.paused) {
+              video.play().catch(() => {});
+            }
+          });
+        }, { once: true });
+        clickHandlerAdded = true;
+      }
+    }
+    
+    // Initialize immediately
+    initializeVideoAutoplay();
+    
+    // Reinitialize after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeVideoAutoplay);
+    }
+  </script>
 </body>
 </html> 

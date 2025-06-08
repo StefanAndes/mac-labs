@@ -8,6 +8,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font-head); color: var(--charcoal); line-height: 1.5; }
 a { color: var(--teal); text-decoration: none; }
+a img { border: none; }
 
 /* Header Styles */
 header { 
