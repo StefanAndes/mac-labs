@@ -31,6 +31,11 @@
       box-shadow: 0 2px 20px rgba(0,0,0,0.05);
       transition: all 0.3s ease;
     }
+    @media (max-width: 768px) {
+      header {
+        background: #ffffff;
+      }
+    }
     .header-container {
       width: 100%;
       max-width: 1400px;
@@ -108,13 +113,18 @@
       }
       .mobile-menu-toggle {
         display: block;
+        position: fixed;
+        right: 1rem;
+        z-index: 103;
       }
       nav {
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
-        background: white;
+        background-color: #ffffff;
+        background: #ffffff;
+        opacity: 1;
         padding: 6rem 2rem 2rem;
         flex-direction: column;
         gap: 1.5rem;
@@ -123,11 +133,18 @@
         transform: translateX(100%);
         transition: transform 0.3s ease;
         box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+        z-index: 102;
       }
       nav a {
         font-size: 1.1rem;
         text-align: center;
         padding: 1rem 2rem;
+        background: transparent;
+        color: var(--charcoal);
+      }
+      nav a:last-child {
+        background: var(--teal);
+        color: white;
       }
       nav.active {
         transform: translateX(0);
