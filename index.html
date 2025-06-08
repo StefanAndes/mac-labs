@@ -417,37 +417,58 @@
     });
 
     // Intersection Observer for video autoplay
-    const videoWrappers = document.querySelectorAll('.video-wrapper');
+    const videos = document.querySelectorAll('.auto-video');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const video = entry.target.querySelector('.auto-video');
+        const video = entry.target;
+        const wrapper = video.closest('.video-wrapper');
+        
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          if (video) {
-            video.play().catch(e => console.log("Auto-play prevented:", e));
-          }
+          wrapper.classList.add('visible');
+          video.play().catch(e => {
+            console.log("Autoplay prevented:", e);
+            // If autoplay was prevented, try again on user interaction
+            document.addEventListener('click', () => {
+              video.play().catch(() => {});
+            }, { once: true });
+          });
         } else {
-          if (video) {
-            video.pause();
-          }
+          video.pause();
         }
       });
     }, {
-      threshold: 0.3,
-      rootMargin: '50px'
+      threshold: 0.4,
+      rootMargin: '50px 0px'
     });
 
-    videoWrappers.forEach(wrapper => observer.observe(wrapper));
-    
-    // Ensure videos start playing if they're already in view
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.auto-video').forEach(video => {
-        const wrapper = video.closest('.video-wrapper');
-        if (wrapper.getBoundingClientRect().top < window.innerHeight) {
-          wrapper.classList.add('visible');
-          video.play().catch(e => console.log("Auto-play prevented:", e));
+    // Observe each video directly
+    videos.forEach(video => {
+      observer.observe(video);
+      
+      // Set initial state if video is already in view
+      const wrapper = video.closest('.video-wrapper');
+      const rect = video.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        wrapper.classList.add('visible');
+        video.play().catch(() => {});
+      }
+      
+      // Ensure video plays when loaded
+      video.addEventListener('loadedmetadata', () => {
+        if (wrapper.classList.contains('visible')) {
+          video.play().catch(() => {});
         }
+      });
+    });
+
+    // Handle dynamically loaded videos
+    document.addEventListener('scroll', () => {
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.auto-video:not([data-observed])').forEach(video => {
+          video.dataset.observed = 'true';
+          observer.observe(video);
+        });
       });
     });
   </script>
