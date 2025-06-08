@@ -34,9 +34,11 @@
       align-items: center; 
     }
     .logo img { 
-      width: 45px; 
+      width: auto;
       height: 45px;
       object-fit: contain;
+      transform: scale(2.5);
+      transform-origin: left center;
     }
     nav { 
       display: flex; 
@@ -180,24 +182,26 @@
   </section>
 
   <!-- Sponge infographic -->
-  <section class="section" id="how">
-    <h2>Why the Sponge Metaphor Matters</h2>
-    <div class="video-wrapper" style="margin:2rem auto;">
-      <video 
-        id="explainer-video"
-        muted 
-        loop
-        playsinline
-        poster="assets/video_thumbnail.jpg">
-        <source src="assets/explainer_video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+  <section class="section video-section" id="how">
+    <div class="video-container">
+      <h2>Why the Sponge Metaphor Matters</h2>
+      <div class="video-wrapper">
+        <video 
+          class="auto-video"
+          muted 
+          loop
+          playsinline
+          poster="assets/video_thumbnail.jpg">
+          <source src="assets/explainer_video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <p class="video-description">
+        Stretch or roll your fascia to <strong style="color:var(--teal)">squeeze waste fluid out</strong>. 
+        Release pressure and sip HydroElastic: <strong style="color:var(--teal)">fresh water + nutrients rush back in</strong>, 
+        leaving tissue elastic and energized.
+      </p>
     </div>
-    <p style="text-align:center;max-width:800px;margin:2rem auto;font-size:1.125rem;line-height:1.6;">
-      Stretch or roll your fascia to <strong style="color:var(--teal)">squeeze waste fluid out</strong>. 
-      Release pressure and sip HydroElastic: <strong style="color:var(--teal)">fresh water + nutrients rush back in</strong>, 
-      leaving tissue elastic and energized.
-    </p>
   </section>
 
   <!-- Video Section -->
@@ -206,7 +210,7 @@
       <h2>Experience the Science in Motion</h2>
       <div class="video-wrapper">
         <video 
-          id="demo-video"
+          class="auto-video"
           muted 
           loop
           playsinline
@@ -224,16 +228,24 @@
   <style>
     .video-section {
       background: linear-gradient(180deg, #fff 0%, var(--mint) 100%);
-      padding: 6rem 1rem;
-      margin: 4rem 0;
+      padding: 8rem 1rem;
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
+    }
+    .video-section:nth-child(even) {
+      background: linear-gradient(180deg, var(--mint) 0%, #fff 100%);
     }
     .video-container {
       max-width: 900px;
       width: 100%;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .video-wrapper {
       position: relative;
@@ -243,6 +255,7 @@
       margin: 3rem auto;
       background: #000;
       aspect-ratio: 16/9;
+      width: 100%;
       transform: translateY(20px);
       opacity: 0;
       transition: all 0.6s ease-out;
@@ -268,8 +281,8 @@
     }
     @media (max-width: 768px) {
       .video-section {
-        padding: 4rem 1rem;
-        margin: 2rem 0;
+        padding: 6rem 1rem;
+        min-height: auto;
       }
       .video-wrapper {
         margin: 2rem auto;
@@ -283,19 +296,35 @@
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const video = entry.target.querySelector('video');
+        const video = entry.target.querySelector('.auto-video');
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          video.play();
+          if (video) {
+            video.play().catch(e => console.log("Auto-play prevented:", e));
+          }
         } else {
-          video.pause();
+          if (video) {
+            video.pause();
+          }
         }
       });
     }, {
-      threshold: 0.4
+      threshold: 0.3,
+      rootMargin: '50px'
     });
 
     videoWrappers.forEach(wrapper => observer.observe(wrapper));
+    
+    // Ensure videos start playing if they're already in view
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.auto-video').forEach(video => {
+        const wrapper = video.closest('.video-wrapper');
+        if (wrapper.getBoundingClientRect().top < window.innerHeight) {
+          wrapper.classList.add('visible');
+          video.play().catch(e => console.log("Auto-play prevented:", e));
+        }
+      });
+    });
   </script>
 
   <!-- Benefits -->
