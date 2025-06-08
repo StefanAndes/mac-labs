@@ -182,8 +182,18 @@
   <!-- Sponge infographic -->
   <section class="section" id="how">
     <h2>Why the Sponge Metaphor Matters</h2>
-    <img src="hydroelastic_sponge_infographic.png" alt="Sponge squeeze and soak infographic" style="width:100%;max-width:900px;display:block;margin:2rem auto;">
-    <p style="text-align:center;max-width:800px;margin:0 auto;font-size:1.125rem;line-height:1.6;">
+    <div class="video-wrapper" style="margin:2rem auto;">
+      <video 
+        id="explainer-video"
+        muted 
+        loop
+        playsinline
+        poster="assets/video_thumbnail.jpg">
+        <source src="assets/explainer_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p style="text-align:center;max-width:800px;margin:2rem auto;font-size:1.125rem;line-height:1.6;">
       Stretch or roll your fascia to <strong style="color:var(--teal)">squeeze waste fluid out</strong>. 
       Release pressure and sip HydroElastic: <strong style="color:var(--teal)">fresh water + nutrients rush back in</strong>, 
       leaving tissue elastic and energized.
@@ -269,13 +279,13 @@
 
   <script>
     // Intersection Observer for video autoplay
-    const videoWrapper = document.querySelector('.video-wrapper');
-    const video = document.getElementById('demo-video');
+    const videoWrappers = document.querySelectorAll('.video-wrapper');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const video = entry.target.querySelector('video');
         if (entry.isIntersecting) {
-          videoWrapper.classList.add('visible');
+          entry.target.classList.add('visible');
           video.play();
         } else {
           video.pause();
@@ -285,7 +295,7 @@
       threshold: 0.4
     });
 
-    observer.observe(videoWrapper);
+    videoWrappers.forEach(wrapper => observer.observe(wrapper));
   </script>
 
   <!-- Benefits -->
