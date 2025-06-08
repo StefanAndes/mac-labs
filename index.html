@@ -294,7 +294,7 @@
   </section>
 
   <!-- Sponge infographic -->
-  <section class="section video-section" id="how">
+  <section class="video-section" id="how">
     <div class="video-container">
       <h2>Why the Sponge Metaphor Matters</h2>
       <div class="video-wrapper">
@@ -317,7 +317,7 @@
   </section>
 
   <!-- Video Section -->
-  <section class="section video-section">
+  <section class="video-section">
     <div class="video-container">
       <h2>Experience the Science in Motion</h2>
       <div class="video-wrapper">
@@ -358,13 +358,17 @@
     .video-container {
       width: 100%;
       max-width: 1000px;
-      padding: 4rem 2rem;
-      margin: 0 auto;
+      padding: 2rem;
+      margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
     .video-container h2 {
       font-size: 2.5rem;
@@ -410,7 +414,12 @@
         padding: 0;
       }
       .video-container {
-        padding: 3rem 1.5rem;
+        padding: 2rem 1rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 95%;
       }
       .video-container h2 {
         font-size: 1.75rem;
