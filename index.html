@@ -129,7 +129,8 @@
         top: 0;
         right: 0;
         bottom: 0;
-        background: #ffffff !important;
+        background-color: rgb(255, 255, 255);
+        background: rgb(255, 255, 255);
         padding: 6rem 2rem 2rem;
         flex-direction: column;
         gap: 1.5rem;
@@ -139,6 +140,17 @@
         transition: transform 0.3s ease;
         box-shadow: -5px 0 25px rgba(0,0,0,0.1);
         z-index: 102;
+        opacity: 1 !important;
+      }
+      nav::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        z-index: -1;
       }
       nav a {
         font-size: 1.1rem;
@@ -146,6 +158,8 @@
         padding: 1rem 2rem;
         background: transparent;
         color: var(--charcoal);
+        position: relative;
+        z-index: 1;
       }
       nav a.nav-cta {
         background: var(--teal);
@@ -153,6 +167,8 @@
       }
       nav.active {
         transform: translateX(0);
+        background-color: white !important;
+        background: white !important;
       }
       .mobile-menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 7px);
