@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/favicon.png">
+    <title>Day 1: Foot Roll & Sip • HydroElastic Course</title>
+    <style>
+        :root {
+            --teal: #008080;
+            --charcoal: #273038;
+            --mint: #d8f7e9;
+            --font-head: "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-head); color: var(--charcoal); line-height: 1.5; }
+        a { color: var(--teal); text-decoration: none; }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: 2.5rem; color: var(--teal); margin: 2rem 0; text-align: center; }
+        .video-container { background: #000; border-radius: 12px; overflow: hidden; margin: 2rem 0; aspect-ratio: 16/9; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        .steps { background: var(--mint); padding: 2rem; border-radius: 8px; margin: 2rem 0; }
+        .steps h2 { color: var(--teal); margin-bottom: 1rem; }
+        .steps ol { margin-left: 2rem; line-height: 2; }
+        .nav-buttons { display: flex; justify-content: space-between; margin: 3rem 0; }
+        .btn { display: inline-block; background: var(--teal); color: white; padding: 0.75rem 2rem; border-radius: 4px; font-weight: 600; }
+        .btn:hover { background: #006666; }
+        .btn.secondary { background: #e0e0e0; color: var(--charcoal); }
+        .btn.secondary:hover { background: #ccc; }
+        .tip { background: #fff8dc; padding: 1rem; border-left: 4px solid var(--teal); margin: 2rem 0; }
+        .progress { display: flex; justify-content: center; gap: 0.5rem; margin: 2rem 0; }
+        .progress-dot { width: 30px; height: 30px; border-radius: 50%; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .progress-dot.active { background: var(--teal); color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress">
+            <div class="progress-dot active">1</div>
+            <div class="progress-dot">2</div>
+            <div class="progress-dot">3</div>
+            <div class="progress-dot">4</div>
+            <div class="progress-dot">5</div>
+            <div class="progress-dot">6</div>
+            <div class="progress-dot">7</div>
+        </div>
+
+        <h1>Day 1: Foot Roll & Sip</h1>
+        
+        <div class="video-container">
+            <video controls poster="../assets/video_thumbnail.jpg">
+                <source src="https://cdn.yourcdn.com/course/day1.mp4" type="video/mp4">
+                <p>Your browser doesn't support video. <a href="https://cdn.yourcdn.com/course/day1.mp4">Download the video</a>.</p>
+            </video>
+        </div>
+
+        <div class="steps">
+            <h2>Today's Routine (2 minutes)</h2>
+            <ol>
+                <li><strong>Prep your HydroElastic:</strong> Mix 1 stick in 12-16 oz water</li>
+                <li><strong>Stand on roller:</strong> Place ball of foot on foam roller</li>
+                <li><strong>Roll slowly:</strong> 30 seconds per foot, heel to toes</li>
+                <li><strong>Sip & absorb:</strong> Drink half your HydroElastic while rolling</li>
+                <li><strong>Finish hydrating:</strong> Complete your drink post-roll</li>
+            </ol>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Pro Tip:</strong> Your feet have over 100,000 nerve endings. Rolling them first thing in the morning wakes up your entire fascial system and primes it for hydration.
+        </div>
+
+        <h2>Why This Works</h2>
+        <p>The plantar fascia connects to your entire posterior chain. By releasing it while introducing hyaluronic acid and collagen, you're creating a hydration superhighway from feet to spine.</p>
+
+        <div class="nav-buttons">
+            <a href="../index.html" class="btn secondary">← Back to Home</a>
+            <a href="day2.html" class="btn">Day 2: Calf Release →</a>
+        </div>
+    </div>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+        gtag('event', 'course_view', {
+            'course_day': 1,
+            'course_title': 'Foot Roll & Sip'
+        });
+    </script>
+</body>
+</html> 

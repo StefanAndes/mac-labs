@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="assets/favicon.png">
-    <meta property="og:image" content="assets/og_hydroelastic.png">
+    <meta property="og:title" content="HydroElastic – Hydrate Every Fibre">
+    <meta property="og:description" content="HydroElastic™ delivers collagen, hyaluronic acid & smart electrolytes so your fascia behaves like a freshly soaked sponge — flexible, gliding, pain‑free.">
+    <meta property="og:image" content="https://stefanandes.github.io/mac-labs/assets/og.png">
+    <meta property="og:url" content="https://stefanandes.github.io/mac-labs/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HydroElastic – Hydrate Every Fibre">
+    <meta name="twitter:description" content="HydroElastic™ delivers collagen, hyaluronic acid & smart electrolytes so your fascia behaves like a freshly soaked sponge — flexible, gliding, pain‑free.">
+    <meta name="twitter:image" content="https://stefanandes.github.io/mac-labs/assets/og.png">
     <title>MAC Labs • HydroElastic™</title>
   <style>
     :root {
@@ -94,11 +101,11 @@
       color: var(--teal);
       transform: translateY(-2px);
     }
-    nav a:last-child {
+    nav a.nav-cta {
       background: var(--teal);
       color: white;
     }
-    nav a:last-child:hover {
+    nav a.nav-cta:hover {
       background: #006666;
       transform: translateY(-2px) scale(1.05);
     }
@@ -142,7 +149,7 @@
         background: transparent;
         color: var(--charcoal);
       }
-      nav a:last-child {
+      nav a.nav-cta {
         background: var(--teal);
         color: white;
       }
@@ -285,12 +292,13 @@
   <!-- Header -->
   <header>
     <div class="header-container">
-      <div class="logo"><img src="assets/MAC_Labs_logo_horizontal (1).png" alt="MAC Labs logo"></div>
+      <div class="logo"><img src="assets/logo.png" alt="MAC Labs logo"></div>
       <nav>
         <a href="#how">How It Works</a>
-        <a href="#plans">Pricing</a>
+        <a href="#plans">Plans</a>
         <a href="#faq">FAQ</a>
-        <a href="#plans">Get Started</a>
+        <a href="/partners.html">Affiliates</a>
+        <a href="#plans" class="nav-cta">Get Started</a>
       </nav>
       <button class="mobile-menu-toggle" aria-label="Toggle menu">
         <span></span>
@@ -305,7 +313,7 @@
     <div>
       <h1>Hydrate Every Fibre.<br/>Move Like New.</h1>
       <p>HydroElastic™ delivers collagen, hyaluronic acid & smart electrolytes so your fascia behaves like a freshly soaked sponge — flexible, gliding, pain‑free.</p>
-      <a href="#plans" class="cta-btn">Start Free 7‑Stick Trial</a>
+      <a href="https://buy.stripe.com/sampler" class="cta-btn" data-product="sampler">Start Free 7‑Stick Trial</a>
     </div>
          <img src="product picture.png" alt="HydroElastic sachet" />
   </section>
@@ -632,9 +640,9 @@
   <section class="section">
     <h2>3‑in‑1 Science‑Backed Benefits</h2>
           <div class="benefits-grid">
-        <div class="benefit"><img src="assets/icon_droplet.png" alt="Hydration icon"><h3>Optimal Hydration</h3><p>150 mg hyaluronic acid + electrolytes pull water deep into the extracellular matrix.</p></div>
-        <div class="benefit"><img src="assets/icon_molecule.png" alt="Fascia icon"><h3>Fascial Support</h3><p>5 g collagen peptides & MSM rebuild flexible collagen fibres.</p></div>
-        <div class="benefit"><img src="assets/icon_lab.png" alt="Lab flask"><h3>Clinically Tested</h3><p>Ingredients & doses validated in human trials for joint comfort & skin elasticity.</p></div>
+        <div class="benefit"><img src="assets/icons/icon_droplet.png" alt="Hydration icon" width="64" height="64" loading="lazy"><h3>Optimal Hydration</h3><p>150 mg hyaluronic acid + electrolytes pull water deep into the extracellular matrix.</p></div>
+        <div class="benefit"><img src="assets/icons/icon_molecule.png" alt="Fascia icon" width="64" height="64" loading="lazy"><h3>Fascial Support</h3><p>5 g collagen peptides & MSM rebuild flexible collagen fibres.</p></div>
+        <div class="benefit"><img src="assets/icons/icon_lab.png" alt="Lab icon" width="64" height="64" loading="lazy"><h3>Clinically Tested</h3><p>Ingredients & doses validated in human trials for joint comfort & skin elasticity.</p></div>
       </div>
   </section>
 
@@ -642,7 +650,7 @@
   <section class="section" style="background:#f8fffc;">
     <h2>The 90‑Day Hydration Protocol</h2>
     <ol style="max-width:720px;margin:2rem auto;font-size:1.1rem;line-height:1.6;">
-      <li><strong>Day 1–7  Squeeze & Sip</strong> — follow our micro‑tutorials, feel first glide improvements.</li>
+      <li><strong>Day 1–7  Squeeze & Sip</strong> — follow our <a href="/course/">free video tutorials</a>, feel first glide improvements.</li>
       <li><strong>Day 8‑30  Collagen Loading</strong> — fibres start rebuilding, stiffness fades.</li>
       <li><strong>Day 31‑90  Elastic Upgrade</strong> — fascia holds hydration, skin glow & joint range improve.</li>
     </ol>
@@ -657,19 +665,19 @@
         <h3>7‑Stick Sampler</h3>
         <div class="price">FREE<small> + $4.95 S&H</small></div>
         <p style="margin:1rem 0 1.5rem;">Taste it, feel it for a week.</p>
-        <a href="#" class="cta-btn" style="display:inline-block;">Claim Sampler</a>
+        <a href="https://buy.stripe.com/sampler" class="cta-btn" style="display:inline-block;" data-product="sampler">Claim Sampler</a>
       </div>
       <div class="price-box" style="border-color:var(--charcoal);">
         <h3>90‑Day Core Protocol</h3>
         <div class="price">$89.85</div>
         <p style="margin:1rem 0 1.5rem;">3 pouches prepaid (30 sticks each) — free shaker bottle.</p>
-        <a href="#" class="cta-btn" style="display:inline-block;">Start Core</a>
+        <a href="https://buy.stripe.com/core-protocol" class="cta-btn" style="display:inline-block;" data-product="core">Start Core</a>
       </div>
       <div class="price-box">
         <h3>6‑Month Momentum</h3>
         <div class="price">$167.70</div>
         <p style="margin:1rem 0 1.5rem;">Extra savings + priority support.</p>
-        <a href="#" class="cta-btn" style="display:inline-block;">Go Momentum</a>
+        <a href="https://buy.stripe.com/momentum-6mo" class="cta-btn" style="display:inline-block;" data-product="momentum">Go Momentum</a>
       </div>
     </div>
   </section>
@@ -693,7 +701,50 @@
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 MAC Labs • Science‑backed, transparency‑first supplements</p>
-    <p><a href="#">Terms</a> • <a href="#">Privacy</a> • <a href="mailto:support@maclabs.com">support@maclabs.com</a></p>
+    <p><a href="/terms.html">Terms</a> • <a href="/privacy.html">Privacy</a> • <a href="/partners.html">Affiliates</a> • <a href="mailto:support@maclabs.com">support@maclabs.com</a></p>
   </footer>
+
+  <!-- Foam Roller Upsell -->
+  <script>
+    // Check for sampler checkout success
+    if (new URLSearchParams(window.location.search).get('sampler') === 'true') {
+      setTimeout(() => {
+        if (confirm('🎯 Special Offer! Add our travel foam-roller for just CA$14.95? Perfect companion for your HydroElastic routine!')) {
+          window.location.href = 'https://buy.stripe.com/sampler-roller-bundle';
+        }
+      }, 3000);
+    }
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Affiliate Tracking (Refersion) -->
+  <script src="https://www.refersion.com/tracker/v3/pub_XXXXX.js"></script>
+
+  <!-- Cookie Consent -->
+  <div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:#273038;color:white;padding:1rem;display:none;z-index:1000;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;">
+      <p style="margin:0;">We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
+      <button onclick="acceptCookies()" style="background:var(--teal);color:white;border:none;padding:0.5rem 1.5rem;border-radius:4px;cursor:pointer;">Got it</button>
+    </div>
+  </div>
+  <script>
+    // Cookie consent logic
+    if (!localStorage.getItem('cookiesAccepted')) {
+      document.getElementById('cookie-banner').style.display = 'block';
+    }
+    function acceptCookies() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+  </script>
+
 </body>
 </html> 

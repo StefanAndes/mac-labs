@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/favicon.png">
+    <title>7-Day Foam Rolling Course • MAC Labs</title>
+    <style>
+        :root {
+            --teal: #008080;
+            --charcoal: #273038;
+            --mint: #d8f7e9;
+            --font-head: "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-head); color: var(--charcoal); line-height: 1.5; }
+        a { color: var(--teal); text-decoration: none; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        h1 { font-size: 3rem; color: var(--teal); margin: 2rem 0; text-align: center; }
+        .intro { text-align: center; font-size: 1.2rem; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .days-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0; }
+        .day-card { background: #f9f9f9; border-radius: 12px; padding: 2rem; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .day-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,128,128,0.2); }
+        .day-number { background: var(--teal); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin: 0 auto 1rem; }
+        .day-card h3 { color: var(--teal); margin-bottom: 0.5rem; }
+        .day-card p { color: #666; margin-bottom: 1rem; }
+        .day-link { display: inline-block; background: var(--teal); color: white; padding: 0.5rem 1.5rem; border-radius: 4px; margin-top: 1rem; }
+        .day-link:hover { background: #006666; }
+        .locked { opacity: 0.6; }
+        .locked .day-link { background: #ccc; pointer-events: none; }
+        .back-link { display: inline-block; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to HydroElastic</a>
+        
+        <h1>7-Day Squeeze & Sip Protocol</h1>
+        <p class="intro">
+            Master the art of fascial hydration with our guided foam rolling + HydroElastic routine. 
+            Just 2 minutes a day to transform how your body moves and feels.
+        </p>
+
+        <div class="days-grid">
+            <div class="day-card">
+                <div class="day-number">1</div>
+                <h3>Foot Roll & Sip</h3>
+                <p>Wake up your entire fascial system starting from the ground up</p>
+                <a href="day1.html" class="day-link">Start Day 1</a>
+            </div>
+
+            <div class="day-card">
+                <div class="day-number">2</div>
+                <h3>Calf Release</h3>
+                <p>Target the muscle pump that drives fluid through your legs</p>
+                <a href="day2.html" class="day-link">Continue to Day 2</a>
+            </div>
+
+            <div class="day-card">
+                <div class="day-number">3</div>
+                <h3>IT Band Glide</h3>
+                <p>Release lateral tension from hip to knee</p>
+                <a href="day3.html" class="day-link">Continue to Day 3</a>
+            </div>
+
+            <div class="day-card">
+                <div class="day-number">4</div>
+                <h3>Quad Flow</h3>
+                <p>Open the front body and improve hip flexibility</p>
+                <a href="day4.html" class="day-link">Continue to Day 4</a>
+            </div>
+
+            <div class="day-card">
+                <div class="day-number">5</div>
+                <h3>Back Relief</h3>
+                <p>Release thoracic spine for better posture</p>
+                <a href="day5.html" class="day-link">Continue to Day 5</a>
+            </div>
+
+            <div class="day-card">
+                <div class="day-number">6</div>
+                <h3>Shoulder Freedom</h3>
+                <p>Unlock upper body mobility and reduce desk tension</p>
+                <a href="day6.html" class="day-link">Continue to Day 6</a>
+            </div>
+
+            <div class="day-card">
+                <div class="day-number">7</div>
+                <h3>Full Body Flow</h3>
+                <p>Combine all techniques into one fluid routine</p>
+                <a href="day7.html" class="day-link">Complete Course</a>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:4rem;padding:2rem;background:var(--mint);border-radius:12px;">
+            <h2 style="color:var(--teal);">Need a Foam Roller?</h2>
+            <p style="margin:1rem 0;">Get our travel-sized roller designed specifically for this protocol</p>
+            <a href="https://buy.stripe.com/travel-roller" class="day-link">Order Roller ($14.95)</a>
+        </div>
+    </div>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</body>
+</html> 
