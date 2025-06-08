@@ -80,6 +80,10 @@
       transition: all 0.3s ease;
       border-radius: 2px;
     }
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+    }
     nav { 
       display: flex; 
       gap: 1.5rem;
@@ -124,33 +128,34 @@
         right: 1rem;
         z-index: 103;
       }
-      nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgb(255, 255, 255);
-        background: rgb(255, 255, 255);
-        padding: 6rem 2rem 2rem;
-        flex-direction: column;
-        gap: 1.5rem;
+      .nav-wrapper {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
         width: 100%;
         max-width: 320px;
         transform: translateX(100%);
         transition: transform 0.3s ease;
-        box-shadow: -5px 0 25px rgba(0,0,0,0.1);
         z-index: 102;
+        background-color: #ffffff !important;
+        background: #ffffff !important;
         opacity: 1 !important;
       }
-      nav::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: white;
-        z-index: -1;
+      .nav-wrapper.active {
+        transform: translateX(0);
+      }
+      nav {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        padding: 6rem 2rem 2rem;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        height: 100%;
+        opacity: 1 !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
       }
       nav a {
         font-size: 1.1rem;
@@ -165,10 +170,8 @@
         background: var(--teal);
         color: white;
       }
-      nav.active {
-        transform: translateX(0);
-        background-color: white !important;
-        background: white !important;
+      .nav-wrapper nav {
+        box-shadow: -5px 0 25px rgba(0,0,0,0.1);
       }
       .mobile-menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 7px);
@@ -307,13 +310,15 @@
   <header>
     <div class="header-container">
       <div class="logo"><img src="assets/logo.png" alt="MAC Labs logo"></div>
-      <nav>
-        <a href="#how">How It Works</a>
-        <a href="#plans">Plans</a>
-        <a href="#faq">FAQ</a>
-        <a href="partners.html">Affiliates</a>
-        <a href="#plans" class="nav-cta">Get Started</a>
-      </nav>
+      <div class="nav-wrapper">
+        <nav>
+          <a href="#how">How It Works</a>
+          <a href="#plans">Plans</a>
+          <a href="#faq">FAQ</a>
+          <a href="partners.html">Affiliates</a>
+          <a href="#plans" class="nav-cta">Get Started</a>
+        </nav>
+      </div>
       <button class="mobile-menu-toggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -479,14 +484,14 @@
   <script>
     // Mobile menu functionality
     const menuToggle = document.querySelector('.mobile-menu-toggle');
-    const nav = document.querySelector('nav');
+    const navWrapper = document.querySelector('.nav-wrapper');
     const overlay = document.querySelector('.overlay');
 
     function toggleMenu() {
       menuToggle.classList.toggle('active');
-      nav.classList.toggle('active');
+      navWrapper.classList.toggle('active');
       overlay.classList.toggle('active');
-      document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+      document.body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
     }
 
     menuToggle.addEventListener('click', toggleMenu);
@@ -495,7 +500,7 @@
     // Close menu when clicking a link
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', () => {
-        if (nav.classList.contains('active')) {
+        if (navWrapper.classList.contains('active')) {
           toggleMenu();
         }
       });
